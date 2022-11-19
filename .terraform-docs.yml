@@ -15,7 +15,7 @@ content: |-
 
   ## Example
   ```terraform
-  {{ include "example/main.tf" }}
+  {{ include "examples/main.tf" }}
   ```
 
 output:

@@ -90,6 +90,6 @@ module "this" {
   ]
 }
 
-output "security_group" {
+output "this" {
   value = module.this
 }
