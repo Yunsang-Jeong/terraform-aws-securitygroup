@@ -14,8 +14,8 @@ content: |-
   {{ .Outputs }}
 
   ## Example
-  ```hcl
-  {{ include "example.tfvars" }}
+  ```terraform
+  {{ include "example/main.tf" }}
   ```
 
 output:

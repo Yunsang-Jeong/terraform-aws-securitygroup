@@ -22,5 +22,3 @@
 **/*.pem
 **/*.bak
 **/*.plan
-
-!example.tfvars
