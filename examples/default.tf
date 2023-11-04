@@ -1,20 +1,11 @@
-provider "aws" {
-  region = "ap-northeast-2"
-}
+module "security_group" {
+  source = "github.com/Yunsang-Jeong/terraform-aws-securitygroup"
 
-data "aws_vpc" "default" {
-  default = true
-}
-
-module "this" {
-  source = "../"
-
-  vpc_id = data.aws_vpc.default.id
+  vpc_id = "vpc-000000000000"
   security_groups = [
     {
-      identifier       = "ec2-bastion"
-      name_tag_postfix = "ec2-bastion"
-      description      = "the security group for bastion host"
+      identifier  = "ec2-bastion"
+      description = "the security group for bastion host"
       ingresses = [
         {
           identifier  = "ssh-public"
@@ -27,9 +18,8 @@ module "this" {
       ]
     },
     {
-      identifier       = "elb-web"
-      description      = "the security group for web-elb"
-      name_tag_postfix = "elb-web"
+      identifier  = "elb-web"
+      description = "the security group for web-elb"
       ingresses = [
         {
           identifier  = "web"
@@ -51,9 +41,8 @@ module "this" {
       }]
     },
     {
-      identifier       = "ec2-web"
-      name_tag_postfix = "ec2-web"
-      description      = "the security group for web-elb"
+      identifier  = "ec2-web"
+      description = "the security group for web-elb"
       ingresses = [
         {
           identifier                       = "srv-web-elb"
@@ -73,9 +62,8 @@ module "this" {
       ]
     },
     {
-      identifier       = "vpc-endpoint"
-      name_tag_postfix = "vpc-endpoint"
-      description      = "the security group for vpc-endpoint"
+      identifier  = "vpc-endpoint"
+      description = "the security group for vpc-endpoint"
       ingresses = [
         {
           identifier  = "https-itself"
@@ -88,8 +76,4 @@ module "this" {
       ]
     }
   ]
-}
-
-output "this" {
-  value = module.this
 }

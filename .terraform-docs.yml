@@ -5,8 +5,6 @@ sections:
   show: [providers, requirements, inputs, outputs]
 
 content: |-
-  {{ .Providers }}
-
   {{ .Requirements }}
 
   {{ .Inputs }}
@@ -15,7 +13,7 @@ content: |-
 
   ## Example
   ```terraform
-  {{ include "examples/main.tf" }}
+  {{ include "examples/default.tf" }}
   ```
 
 output:

@@ -1,21 +1,17 @@
 ################################################################################
 # Common
 
-variable "default_tags" {
-  description = "Default tags for all resources."
-  type        = map(string)
-  default     = {}
+variable "name_prefix" {
+  description = "The name-prefix of all resources."
+  type        = string
+  default     = "tf-poc"
 }
 
-variable "name_tag_convention" {
-  description = "The name tag convention of all resources."
-  type = object({
-    project_name = string
-    stage        = string
-  })
+variable "global_additional_tag" {
+  description = "Additional tags for all resources."
+  type        = map(string)
   default = {
-    project_name = "tf"
-    stage        = "poc"
+    "TerraformModuleSource" = "github.com/Yunsang-Jeong/terraform-aws-securitygroup"
   }
 }
 ################################################################################
@@ -37,10 +33,9 @@ variable "vpc_id" {
 variable "security_groups" {
   description = "The security gorup information"
   type = list(object({
-    identifier       = string
-    description      = string
-    name_tag_postfix = string
-    additional_tag   = optional(map(string), {})
+    identifier     = string
+    description    = string
+    additional_tag = optional(map(string), {})
     ingresses = optional(list(object({
       identifier                       = string
       description                      = string

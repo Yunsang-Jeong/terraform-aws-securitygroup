@@ -6,13 +6,13 @@ resource "aws_security_group" "this" {
 
   vpc_id      = var.vpc_id
   description = each.value.description
-  name_prefix = join("-", ["scg", local.common_name_tag, each.value.name_tag_postfix])
+  name_prefix = "${var.name_prefix}-${each.key}"
 
   tags = merge(
-    var.default_tags,
+    var.global_additional_tag,
     each.value.additional_tag,
     {
-      "Name" = join("-", ["scg", local.common_name_tag, each.value.name_tag_postfix])
+      "Name" = "${var.name_prefix}-${each.key}"
     }
   )
 
